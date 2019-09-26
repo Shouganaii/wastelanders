@@ -6,6 +6,8 @@ $routes['/users/login'] =  '/users/login';
 $routes['/users/new'] =  '/users/new_record';
 $routes['/users/feed'] =  '/users/feed/';
 $routes['/users/{id}'] =  '/users/view/:id';
+$routes['/users/pegaId'] =  '/users/pegaId/';
+
 $routes['/users/{id}/photos'] =  '/users/photos/:id';
 $routes['/photos/{id}'] =  '/photos/view/:id';
 $routes['/users/{id}/follow'] =  '/users/follow/:id';

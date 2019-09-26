@@ -27,22 +27,21 @@ class UsersController extends Controller
                 $array['error'] = 'E-mail ou senha não preenchidos via post ';
             }
 
-        } 
+        }
         if ($method == 'GET') {
             if (!empty($data['email']) && !empty($data['pass'])) {
                 $users = new Users();
                 if ($users->checkCredentials($data['email'], $data['pass'])) {
                     $array['jwt'] = $users->createJwt();
                 } else {
-                    $array['error'  ] = 'Acesso negado';
+                    $array['error'] = 'Acesso negado';
                 }
             } else {
                 $array['error'] = 'E-mail ou senha não preenchidos via get';
             }
 
         }
-    
-        
+
         // else {
         //     $array['error'] = 'Método de requisição incompatível';
         // }
@@ -165,6 +164,21 @@ class UsersController extends Controller
 
         } else {
             $array['error'] = "Acesso negado";
+        }
+
+        $this->returnJson($array);
+    }
+    public function pegaId()
+    {
+        $array = array('error' => '', 'logged' => false);
+        $method = $this->getMethod();
+        $data = $this->getRequestData();
+        $users = new Users();
+        if (!empty($data['jwt']) && $users->validateJwt($data['jwt'])) {
+            if ($method == 'GET') {
+                $array['id_usuario'] = $users->getId();
+            }
+
         }
 
         $this->returnJson($array);
